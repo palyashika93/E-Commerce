@@ -1,0 +1,260 @@
+{% load static %}
+{% load custom_filter %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Atshop Shopping Website</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+         <!-- Favicons -->
+       <link href="{% static 'img/faviconlogo.png' %}" rel="icon">
+       <link href="{% static 'css/img/apple-touch-icon.png' %}" rel="apple-touch-icon">
+       <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon">
+
+      
+
+        <link rel="stylesheet" type='text/css' href="{% static 'css/style.css' %}">
+
+  <!--CDN Of Bootstrap-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<!-- font_awesome -->  
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+</head>
+  
+    <body>
+    <section id="nav-bar-index">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+          
+         
+          <a class="navbar-brand" alt=""><h3 class="font-effect-neon py-2">@Shop</h3></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+          </button>
+  
+  
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav m-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/home" ><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/contact">Contact</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/allproducts">Shopping</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/myorders">My Orders</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a href="/cart" class="nav-link text-white"><span class="badge bg-danger">{{totalitem}}</span> Cart </a>
+               </li>
+              {% if request.session.customer %}
+              <li class="nav-item">
+                <a class="nav-link" href="/logout">Logout</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#"><i class="fas fa-user-circle" aria-hidden="true"></i></a>
+              </li>
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link" href="/register">Signup</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+              </li>
+              {% endif %}
+            </ul>
+  
+            
+          <form class="d-flex align-content-center">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-success" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </form>
+          
+          </div>
+        </div>
+      </nav>
+      </section>
+      <!--------------------------------END----------HEADER---------------------------------------->
+      <!-----------------------------------SLIDER--SECTION---------------------------------------------------->
+  <section class="slider">
+  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="{% static 'img/slider.jpg' %}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/slider2.jpg' %}" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="{% static 'img/slider3.jpg' %}" class="d-block w-100" alt="...">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</section>
+    
+    <!---------------------SERVICES--------------------------------------->
+    <section id="services">
+      <div class="container text-center">
+        <h1 class="title">WHY CHOOSE US?</h1>
+        <div class="row text-center">
+          {% for whychoose in whychooseus %}
+         <div class="col-md-4 services">
+           <img src="{{whychoose.icon_image.url}}" class="service-img">
+           <h4>{{whychoose.heading_name}}</h4>
+           <p>{{whychoose.description}}</p>
+         </div>
+         {% endfor %}
+      </section>  
+     <!-------------------------Categories------------------------------->
+     <!--------------------------row 1------------------------------>
+     <section class="featured-categories">
+      <div class="categories text-center">
+        <h1 class="title">Our Products</h1>
+        <div class="container">
+          <div class="row">
+  
+            <div class="col-md-4">
+            <a href="/allproducts?category=1"><img src="{% static 'img/men2.jpg' %}" alt=""></a>
+            </div>
+            <div class="col-md-4">
+              <a href="/allproducts?category=2"><img class="category-height" src="{% static 'img/womenwear.jpg' %}" alt=""></a>
+             </div>
+             <div class="col-md-4">
+              <a href="/allproducts?category=3"><img class="category-height" src="{% static 'img/kidswear.jpg' %}" alt=""></a>
+             </div>
+            
+           </div>    
+       </div>
+      </div>
+      <!----------------------row2--------------------->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <a href="/allproducts?category=4"><img class="category-height" src="{% static 'img/smartwatch.jpg' %}" alt=""></a>
+          </div>
+          <div class="col-md-4">
+            <a href="/allproducts?category=5"><img src="{% static 'img/smartphone.jpg' %}" alt=""></a>
+           </div>
+           <div class="col-md-4">
+            <a href="/allproducts?category=6"><img class="category-height" src="{% static 'img/laptop.jpg' %}" alt=""></a>
+           </div>
+         </div>    
+     </div>
+     </section>
+     <!----------------------------On sale-------------------------->
+     <section class="on-sale">
+      <div class="container text-center">
+        <h1 class="title">ON SALE</h1>
+        <div class="row pt-4">
+          {% for onsale in onsales%}
+          <div class="col-md-3">
+            <div class="product-top">
+            <a href="#">  <img src="{{onsale.product.product_image.url}}" alt=""></a>
+            </div>
+            <div class="product-bottom text-center">
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fa fa-star"></i>
+              <i class="fas fa-star-half-alt"></i>
+              <h3>{{onsale.product.product_name}}</h3>
+              <h5>{{onsale.product.product_price|currency}}</h5>
+              <small>{{onsale.product.product_offer}}% Off</small>
+            </div>
+          </div>
+          {% endfor %} 
+        </div>
+      </div>
+      </section>
+    
+      <!---------------------------Website Features------------------------>
+     <section class="website-features">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-3 feature-box">
+              <img src="{% static 'img/feature1.jpg' %}" alt="">
+              <div class="feature-text">
+               <p><b>100% Original items </b>are available at company.</p>
+              </div>
+            </div>
+            <div class="col-md-3 feature-box">
+              <img src="{% static 'img/feature2.jpg' %}" alt="">
+              <div class="feature-text">
+               <p><b>Return within 30 days </b>of receiving of order.</p>
+              </div>
+            </div>
+            <div class="col-md-3 feature-box">
+              <img src="{% static 'img/feature3.png' %}" alt="">
+              <div class="feature-text">
+               <p><b>Get Free Delivery </b>on order above 500.</p>
+              </div>
+            </div>
+            <div class="col-md-3 feature-box">
+              <img src="{% static 'img/feature4.png' %}" alt="">
+              <div class="feature-text">
+               <p><b>Pay online through multiple </b>options (Card/Net banking).</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+     
+      <!----------------------------Footer------------------------------->
+     <section class="footer">
+        <div class="container text-center">
+          <div class="row">
+            <div class="col-md-3">
+              <h1>Useful Links</h1>
+              <p>Privacy Policy</p>
+              <p>Terms of Use </p>
+              <p>Return Policy</p>
+              <p>Discount Coupons</p>
+            </div>
+
+            <div class="col-md-3">
+              <h1>Company</h1>
+              <p>About Us</p>
+              <p>Contact Us </p>
+              <p>Career</p>
+              <p>Affiliate</p>
+            </div>
+
+            <div class="col-md-3">
+              <h1>Follow Us On</h1>
+              <p><img class="icon-image" src="{% static 'img/facebook-icon.png' %}">Facebook</p>
+              <p> <img class="icon-image" src="{% static 'img/whatsapp-icon.png' %}">Whatsapp</p>
+              <p> <img class="icon-image" src="{% static 'img/linkedin-icon.png' %}">Linkedin</p>
+              <p><img class="icon-image" src="{% static 'img/twitter-icon.png' %}">Twitter</p>
+            </div>
+
+            <div class="col-md-3 footer-image">
+              <h1>Download App</h1>
+              <img class="download" src="{% static 'img/download2.jpg' %}" alt="">
+            </div>
+          </div>
+          <hr>
+          <p class="copyright">Made by <i class="fas fa-heart "></i> me</p>
+        </div>
+      </section>
+
+    </body>
+</html>
